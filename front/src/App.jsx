@@ -27,7 +27,9 @@ const App = () => {
     const getImage = async (city) => {
       try {
         setLoading(true);
-        const response = await axios.get(`https://weatherapp-odzs.onrender.com/api/cities/${city}`);
+        const response = await axios.get(
+          `https://weatherapp-odzs.onrender.com/api/cities/${city}`,
+        );
         const imgUrl = response.data;
         const img = new Image();
 
@@ -49,7 +51,9 @@ const App = () => {
   useEffect(() => {
     const getWeather = async (city) => {
       try {
-        const response = await axios.get(`https://weatherapp-odzs.onrender.com/api/weather/${city}`);
+        const response = await axios.get(
+          `https://weatherapp-odzs.onrender.com/api/weather/${city}`,
+        );
         setWeather(response.data);
       } catch (err) {
         console.log(err);
@@ -137,7 +141,9 @@ const App = () => {
           </div>
         </div>
         <div className=" border border-white rounded-3xl p-12 backdrop-blur-md h-screen overflow-hidden">
-          <h2 className="text-3xl font-bold tracking-tighter text-center pb-4">Current Metrics</h2>
+          <h2 className="text-3xl font-bold tracking-tighter text-center pb-4">
+            Current Metrics
+          </h2>
           <div className="w-[80%] mx-auto flex flex-col  gpa-16 lg:gap-20">
             <p className="border-b-2 p-2 flex justify-between ">
               <span className="flex gap-1">
@@ -146,47 +152,26 @@ const App = () => {
               </span>
               <span>{weather.main?.temp_min}</span>
             </p>
-             <p className="border-b-2 p-2 flex justify-between ">
+            <p className="border-b-2 p-2 flex justify-between ">
               <span className="flex gap-1">
                 <Thermometer size={20} />
                 Max Temp :
               </span>
               <span>{weather.main?.temp_max}</span>
             </p>
-             <p className="border-b-2 p-2 flex justify-between ">
+            <p className="border-b-2 p-2 flex justify-between ">
               <span className="flex gap-1">
                 <Droplet size={20} />
                 Humidity :
               </span>
               <span>{weather.main?.humidity}</span>
             </p>
-             <p className="border-b-2 p-2 flex justify-between ">
+            <p className="border-b-2 p-2 flex justify-between ">
               <span className="flex gap-1">
                 <Gauge size={20} />
                 Pressure :
               </span>
               <span>{weather.main?.pressure}</span>
-            </p>
-             <p className="border-b-2 p-2 flex justify-between ">
-              <span className="flex gap-1">
-                <Wind size={20} />
-                Wind Speed :
-              </span>
-              <span>{weather.wind?.speed}</span>
-            </p>
-            <p className="border-b-2 p-2 flex justify-between ">
-              <span className="flex gap-1">
-                <Wind size={20} />
-                Wind Speed :
-              </span>
-              <span>{weather.wind?.speed}</span>
-            </p>
-            <p className="border-b-2 p-2 flex justify-between ">
-              <span className="flex gap-1">
-                <Wind size={20} />
-                Wind Speed :
-              </span>
-              <span>{weather.wind?.speed}</span>
             </p>
             <p className="border-b-2 p-2 flex justify-between ">
               <span className="flex gap-1">
