@@ -124,27 +124,27 @@ const App = () => {
           </ul>
         </nav>
       </header>
-      <main className="p-12 font-black flex flex-cols lg:grid lg:grid-cols-2">
-        <div>
-          <div className=" absolute top-1/2 -translate-y-1/2 p-12 ">
-            <div className="text-9xl">{weather?.main?.temp}°C</div>
-            <h1 className="text-7xl text-shadow-lg flex gap-2 items-center ">
+      <main className="p-4 md:p-12 font-black flex flex-col lg:grid lg:grid-cols-2">
+        <div className="h-[35vh] lg:h-screen">
+          <div className=" absolute top-[45vh] lg:top-1/2 -translate-y-1/2 p-12 ">
+            <div className=" text-7xl lg:text-9xl">{weather?.main?.temp}°C</div>
+            <h1 className="text-3xl lg:text-7xl text-shadow-lg flex gap-2 items-center ">
               <MapPin size={60} />
               {weather.name} {weather.sys?.country}
             </h1>
-            <p className="p-5 text-2xl">
+            <p className="p-5 text-xl lg:text-2xl">
               {weather?.weather?.[0]?.description}{" "}
-              <span className="text-2xl font-bold ml-6">
+              <p className="text-xl lg:text-2xl font-bold lg:ml-6">
                 {weather.timezone ? getLocalTime(weather.timezone) : " --:--"}
-              </span>
+              </p>
             </p>
           </div>
         </div>
-        <div className=" border border-white rounded-3xl p-12 backdrop-blur-md h-screen overflow-hidden">
+        <div className=" border border-white rounded-3xl p-4 md:p-12 backdrop-blur-md h-[70vh] lg:h-screen overflow-hidden">
           <h2 className="text-3xl font-bold tracking-tighter text-center pb-4">
             Current Metrics
           </h2>
-          <div className="w-[80%] mx-auto flex flex-col  gpa-16 lg:gap-20">
+          <div className="w-[80%] mx-auto flex flex-col  gap-16 lg:gap-20">
             <p className="border-b-2 p-2 flex justify-between ">
               <span className="flex gap-1">
                 <Thermometer size={20} />
