@@ -27,7 +27,7 @@ const App = () => {
     const getImage = async (city) => {
       try {
         setLoading(true);
-        const response = await axios.get(`https://weatherapp-odzs.onrender.com//api/cities/${city}`);
+        const response = await axios.get(`https://weatherapp-odzs.onrender.com/api/cities/${city}`);
         const imgUrl = response.data;
         const img = new Image();
 
@@ -49,7 +49,7 @@ const App = () => {
   useEffect(() => {
     const getWeather = async (city) => {
       try {
-        const response = await axios.get(`${import.meta.env.URL}/api/weather/${city}`);
+        const response = await axios.get(`https://weatherapp-odzs.onrender.com/api/weather/${city}`);
         setWeather(response.data);
       } catch (err) {
         console.log(err);
