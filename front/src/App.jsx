@@ -12,7 +12,7 @@ import axios from "axios";
 
 const App = () => {
   const [image, setImage] = useState(
-    "https://media.istockphoto.com/id/1007768414/photo/blue-sky-with-bright-sun-and-clouds.jpg?s=612x612&w=0&k=20&c=MGd2-v42lNF7Ie6TtsYoKnohdCfOPFSPQt5XOz4uOy4=",
+    "https://media.istockphoto.com/id/1007768414/photo/blue-sky-with-bight-sun-and-clouds.jpg?s=612x612&w=0&k=20&c=MGd2-v42lNF7Ie6TtsYoKnohdCfOPFSPQt5XOz4uOy4=" || "./assets/hero.png"
   );
   const [loading, setLoading] = useState(false);
   const [weather, setWeather] = useState({});
@@ -84,6 +84,7 @@ const App = () => {
       className="min-h-screen w-full bg-cover bg-center text-white overflow-hidden"
       style={{
         backgroundImage: `url(${image})`,
+        opacity: 0.7,
       }}>
       <header className="py-3 flex flex-col md:flex-row gap-3 justify-center items-center md:justify-evenly">
         <h1 className="text-3xl tracking-tighter font-black text-shadow-lg">
