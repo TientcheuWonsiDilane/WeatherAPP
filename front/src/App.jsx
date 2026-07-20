@@ -12,6 +12,8 @@ import axios from "axios";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+gsap.registerPlugin(useGSAP);
+
 const App = () => {
 
    const [image, setImage] = useState(
