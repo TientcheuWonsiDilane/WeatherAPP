@@ -13,6 +13,10 @@ app.use(express.json());
 
 app.get("/api/weather/:city", getWeather);
 app.get("/api/cities/:city", getCity);
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "ready" });
+});
+
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

@@ -15,8 +15,28 @@ import gsap from "gsap";
 gsap.registerPlugin(useGSAP);
 
 const App = () => {
+  const [isBackendReady, setIsBackendReady] = useState(false);
 
-   const [image, setImage] = useState(
+  useEffect(() => {
+    const checkServer = async () => {
+      try {
+        const response = await fetch(
+          "https://weatherapp-odzs.onrender.com/api/health",
+        );
+        if (response.ok) {
+          setIsBackendReady(true);
+        } else {
+          setTimeout(checkServer, 5000);
+        }
+      } catch (error) {
+        setTimeout(checkServer, 5000);
+      }
+    };
+
+    checkServer();
+  }, []);
+
+  const [image, setImage] = useState(
     "https://media.istockphoto.com/id/1007768414/photo/blue-sky-with-bight-sun-and-clouds.jpg?s=612x612&w=0&k=20&c=MGd2-v42lNF7Ie6TtsYoKnohdCfOPFSPQt5XOz4uOy4=" ||
       "./assets/hero.png",
   );
@@ -24,30 +44,31 @@ const App = () => {
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("Yaounde");
 
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      delay: 1,
-      defaults: {
-        ease: "power2.out",
-        duration: 1.7,
-      },
-    });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        delay: 1,
+        defaults: {
+          ease: "power2.out",
+          duration: 1.7,
+        },
+      });
 
-    tl.from("#metrics", {
-      opacity: 0,
-      y: 500,
-    }).from(
-      ".text",
-      {
+      tl.from("#metrics", {
         opacity: 0,
-        y: 50,
-        stagger: 0.5,
-      },
-      "-=0.2",
-    );
-  }, {dependencies: [city]});
-
- 
+        y: 500,
+      }).from(
+        ".text",
+        {
+          opacity: 0,
+          y: 50,
+          stagger: 0.5,
+        },
+        "-=0.2",
+      );
+    },
+    { dependencies: [city] },
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -110,6 +131,15 @@ const App = () => {
     });
   };
 
+  if (!isBackendReady) {
+    return (
+      <div className="min-h-screen w-full bg-cover bg-center text-white oflex flex-col justify-center items-center verflow-hidden">
+        <h2>Waking up the server...</h2>
+        <p>This may take up to 60 seconds on Render's free tier.</p>
+      </div>
+    );
+  }
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center text-white overflow-hidden"
@@ -161,7 +191,7 @@ const App = () => {
         <div id="current" className="h-[35vh] lg:h-screen  ">
           <div className=" absolute top-[45vh] lg:top-1/2 -translate-y-1/2 p-12 ">
             <div className=" text text-7xl text-sky-600 lg:text-9xl">
-              {weather ? weather?.main?.temp : "0.00" }°C
+              {weather ? weather?.main?.temp : "0.00"}°C
             </div>
             <h1 className=" text text-3xl lg:text-7xl text-shadow-lg flex gap-2 items-center ">
               <MapPin className=" aspect-2/3" width={60} height={80} />
@@ -174,7 +204,9 @@ const App = () => {
             </h1>
 
             <p className=" text text-xl  lg:text-2xl font-black lg:ml-6">
-              {weather.timezone ? getLocalTime(weather.timezone) : "01 Jan, --:--"}
+              {weather.timezone
+                ? getLocalTime(weather.timezone)
+                : "01 Jan, --:--"}
             </p>
           </div>
         </div>
