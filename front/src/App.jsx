@@ -40,6 +40,8 @@ const App = () => {
     "https://media.istockphoto.com/id/1007768414/photo/blue-sky-with-bight-sun-and-clouds.jpg?s=612x612&w=0&k=20&c=MGd2-v42lNF7Ie6TtsYoKnohdCfOPFSPQt5XOz4uOy4=" ||
       "./assets/hero.png",
   );
+
+  const container = useRef();
   const [loading, setLoading] = useState(false);
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("Yaounde");
@@ -67,7 +69,7 @@ const App = () => {
         "-=0.2",
       );
     },
-    { dependencies: [city] },
+    { dependencies: [city] }, { scope: container },
   );
 
   const handleSubmit = (event) => {
@@ -187,7 +189,7 @@ const App = () => {
           </ul>
         </nav>
       </header>
-      <main className="p-4  gap-12 md:p-12 font-black flex flex-col lg:grid lg:grid-cols-2">
+      <main className="p-4  gap-12 md:p-12 font-black flex flex-col lg:grid lg:grid-cols-2" ref={container}>
         <div id="current" className="h-[35vh] lg:h-screen  ">
           <div className=" absolute top-[45vh] lg:top-1/2 -translate-y-1/2 p-12 ">
             <div className=" text text-7xl text-sky-600 lg:text-9xl">
