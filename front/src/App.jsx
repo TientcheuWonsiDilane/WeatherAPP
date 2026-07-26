@@ -69,8 +69,7 @@ const App = () => {
         "-=0.2",
       );
     },
-    { dependencies: [city] },
-    { scope: container },
+    { scope: container, dependencies: [city] },
   );
 
   const handleSubmit = (event) => {
@@ -134,12 +133,16 @@ const App = () => {
     });
   };
 
-  return !isBackendReady ? (
-    <div className="min-h-screen w-full bg-slate-200 text-blue-950 flex flex-col justify-center items-center">
-      <h2 id="metrics">Waking up the server...</h2>
-      <p className="text">This may take up to 60 seconds</p>
-    </div>
-  ) : (
+  if (!isBackendReady) {
+    return (
+      <div className="min-h-screen w-full bg-slate-200 text-blue-950 flex flex-col justify-center items-center">
+        <h2 id="metrics">Waking up the server...</h2>
+        <p className="text">This may take up to 60 seconds</p>
+      </div>
+    );
+  }
+
+  return (
     <div
       className="min-h-screen w-full bg-cover bg-center text-white overflow-hidden"
       style={{
