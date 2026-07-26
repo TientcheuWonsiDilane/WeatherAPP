@@ -136,8 +136,8 @@ const App = () => {
   if (!isBackendReady) {
     return (
       <div className="min-h-screen w-full bg-slate-200 text-blue-950 flex flex-col justify-center items-center">
-        <h2 id="metrics">Waking up the server...</h2>
-        <p className="text">This may take up to 60 seconds</p>
+        <h2 >Waking up the server...</h2>
+        <p>This may take up to 60 seconds</p>
       </div>
     );
   }
