@@ -69,7 +69,8 @@ const App = () => {
         "-=0.2",
       );
     },
-    { dependencies: [city] }, { scope: container },
+    { dependencies: [city] },
+    { scope: container },
   );
 
   const handleSubmit = (event) => {
@@ -133,16 +134,12 @@ const App = () => {
     });
   };
 
-  if (!isBackendReady) {
-    return (
-      <div className="min-h-screen w-full bg-slate-200 text-blue-950 flex flex-col justify-center items-center">
-        <h2 id="metrics">Waking up the server...</h2>
-        <p className="text">This may take up to 60 seconds</p>
-      </div>
-    );
-  }
-
-  return (
+  return !isBackendReady ? (
+    <div className="min-h-screen w-full bg-slate-200 text-blue-950 flex flex-col justify-center items-center">
+      <h2 id="metrics">Waking up the server...</h2>
+      <p className="text">This may take up to 60 seconds</p>
+    </div>
+  ) : (
     <div
       className="min-h-screen w-full bg-cover bg-center text-white overflow-hidden"
       style={{
@@ -189,7 +186,9 @@ const App = () => {
           </ul>
         </nav>
       </header>
-      <main className="p-4  gap-12 md:p-12 font-black flex flex-col lg:grid lg:grid-cols-2" ref={container}>
+      <main
+        className="p-4  gap-12 md:p-12 font-black flex flex-col lg:grid lg:grid-cols-2"
+        ref={container}>
         <div id="current" className="h-[35vh] lg:h-screen  ">
           <div className=" absolute top-[45vh] lg:top-1/2 -translate-y-1/2 p-12 ">
             <div className=" text text-7xl text-sky-600 lg:text-9xl">
